@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Asisten;
+use App\Models\Software;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -7,11 +9,28 @@ Route::get('/', function () {
 });
 
 Route::get('/softwares', function () {
-    return view('mastersoftware');
+    $softwares = Software::latest();
+
+    if (request('search')) {
+        $softwares->where('name_software', 'like', '%' . request('search') . '%');
+    }
+
+    return view('mastersoftware', [
+        'softwares' => $softwares->paginate(8)
+    ]);
 });
 
 Route::get('/asistens', function () {
-    return view('masterasisten');
+    $asistens = Asisten::latest();
+
+
+    if (request('search')) {
+        $asistens->where('name', 'like', '%' . request('search') . '%');
+    }
+
+    return view('masterasisten', [
+        'asistens' => $asistens->paginate(8)
+    ]);
 });
 
 Route::get('/instalations', function () {
