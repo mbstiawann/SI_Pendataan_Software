@@ -31,6 +31,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
+        
         'password',
         'remember_token',
     ];
@@ -48,8 +49,6 @@ class User extends Authenticatable
         ];
     }
 
-    public function asistens(): HasOne
-    {
-        return $this->hasOne(Asisten::class, 'user_id');
-    }
+   
+    
 }

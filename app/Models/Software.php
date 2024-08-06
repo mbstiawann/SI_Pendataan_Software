@@ -14,6 +14,7 @@ class Software extends Model
 
     protected $fillable= [
         'name_software',
+        'slug',
         'category_software',
         'licence'
     ];

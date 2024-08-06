@@ -90,15 +90,31 @@
                                     Request New Software <span class="badge bg-transparent"><i
                                             class="bi bi-send-plus"></i></span>
                                 </button>
-                                <button type="button" class="btn btn-success">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#border-less">
                                     Add New Software <span class="badge bg-transparent"><i
                                             class="bi bi-plus-circle"></i></span>
                                 </button>
                             </div>
 
+
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-hover table-lg">
+
+                                        @if (session('success'))
+                                            <div class="alert alert-light-success color-success">
+                                                {{ session('success') }}</div>
+                                        @endif
+                                        @if ($errors->any())
+                                            <div class="alert alert-light-danger color-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
                                         <thead>
                                             <tr>
                                                 <th>No. </th>
@@ -148,3 +164,72 @@
         </section>
     </div>
 </x-layout>
+
+<div class="modal fade text-left modal-borderless" id="border-less" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Input New Software</h5>
+                <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <form method="POST" action="{{ url('/softwares') }}">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="basicInput">Name Software</label>
+                            <input type="text" class="form-control" id="basicInput"
+                                placeholder="Input Software Name" name="name_software">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="basicInput">Slug</label>
+                            <input type="text" class="form-control" id="basicInput"
+                                placeholder="Input Software Slug" name="slug">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="helpInputTop">Category Software</label>
+                            <fieldset class="form-group">
+                                <select class="form-select" id="basicSelect" name="category_software">
+                                    <option>Choose Category...</option>
+                                    <option value="Design">Design</option>
+                                    <option value="Code">Code</option>
+                                    <option value="Analysis">Analysis</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </fieldset>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="helperText">Licence</label>
+                            <fieldset class="form-group">
+                                <select class="form-select" id="basicSelect" name="licence">
+                                    <option>Licence or Not...</option>
+                                    <option value="need">Need</option>
+                                    <option value="dontneed">Don't Need</option>
+                                </select>
+                            </fieldset>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Reset</span>
+                            </button>
+                            <button type="submit" class="btn btn-primary ms-1" data-bs-dismiss="modal">
+                                <i class="bx bx-check d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Send</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
