@@ -13,6 +13,7 @@ Route::get('/', function () {
 Route::get('/softwares', [SoftwareController::class, 'index']);
 Route::post('/softwares', [SoftwareController::class, 'store']);
 Route::get('/asistens', [AsistenController::class, 'index']);
+Route::post('/asistens', [AsistenController::class, 'store']);
 
 Route::get('/instalations', function () {
     return view('tr_instalations');

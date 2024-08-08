@@ -23,4 +23,5 @@ class Software extends Model
     {
         return $this->hasMany(Instalation::class, 'software_id');
     }
+    
 }

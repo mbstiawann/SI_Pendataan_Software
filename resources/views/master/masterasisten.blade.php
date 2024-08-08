@@ -86,7 +86,7 @@
 
             <div class="modal-body">
                 <div class="col-md-12">
-                    <form method="POST" action="{{ url('/softwares') }}">
+                    <form method="POST" action="{{ url('/asistens') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
@@ -114,7 +114,7 @@
 
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1" class="form-label">Address</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="address"></textarea>
                         </div>
 
                         <div class="form-group">
@@ -136,7 +136,7 @@
 
                         <div class="form-group">
                             <label for="formFile" class="form-label">Image</label>
-                                    <input class="form-control" type="file" id="formFile">
+                            <input class="form-control" type="file" id="formFile" name="image">
                         </div>
 
                         <div class="form-group">

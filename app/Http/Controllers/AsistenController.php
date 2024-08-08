@@ -29,19 +29,26 @@ class AsistenController extends Controller
             'address' => 'required',
             'phone_number' => 'required',
             'study_program' => 'required',
-            'image' => 'required',
-            'join_date' => 'required'
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'join_date' => 'required|date'
         ]);
 
-        $data = [
-            'nim' => $request->input('nim'),
-            'name' => $request->input('name'),
-            'sex' => $request->input('sex'),
-            'address' => $request->input('address'),
-            'phone_number' => $request->input('phone_number'),
-            'study_program' => $request->input('study_program'),
-            'image'=> $request->input('image'),
-            'join_date' => $request->input('join_date')
-        ];
+        $asisten = new Asisten;
+
+        $asisten->nim = $request->nim;
+        $asisten->name = $request->name;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->extension();
+            $image->storeAs('public/image/asistens', $imageName);
+            $asisten->image = 'storage/images/' . $imageName;
+        }
+        $asisten->sex = $request->sex;
+        $asisten->address = $request->address;
+        $asisten->phone_number = $request->phone_number;
+        $asisten->study_program = $request->study_program;
+        $asisten->join_date = $request->join_date;
+
+        $asisten->save();
     }
 }

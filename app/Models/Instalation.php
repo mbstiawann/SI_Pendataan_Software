@@ -29,4 +29,5 @@ class Instalation extends Model
     {
         return $this->belongsTo(Software::class);
     }
+    
 }
